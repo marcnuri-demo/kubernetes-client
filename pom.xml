@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.marcnuri.demo.kubernetes-client</groupId>
+  <artifactId>kubernetes-client-parent</artifactId>
+  <version>${revision}</version>
+  <name>${global.name} :: Parent</name>
+  <packaging>pom</packaging>
+
+  <properties>
+    <revision>0.0.1-SNAPSHOT</revision>
+    <java.version>12</java.version>
+    <global.name>blog.marcnuri.com :: Kubernetes Client</global.name>
+    <apache.maven.maven-compiler-plugin.version>3.8.1</apache.maven.maven-compiler-plugin.version>
+    <apache.maven.maven-assembly-plugin.version>3.1.1</apache.maven.maven-assembly-plugin.version>
+    <apache.commons.commons-lang3.version>3.9</apache.commons.commons-lang3.version>
+    <apache.commons.commons-codec.version>1.13</apache.commons.commons-codec.version>
+    <apache.commons.commons-compress.version>1.19</apache.commons.commons-compress.version>
+    <kubernetes-client.version>4.7-SNAPSHOT</kubernetes-client.version>
+  </properties>
+
+  <modules>
+    <module>upload</module>
+  </modules>
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>io.fabric8</groupId>
+        <artifactId>openshift-client</artifactId>
+        <version>${kubernetes-client.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.commons</groupId>
+        <artifactId>commons-lang3</artifactId>
+        <version>${apache.commons.commons-lang3.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>commons-codec</groupId>
+        <artifactId>commons-codec</artifactId>
+        <version>${apache.commons.commons-codec.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.commons</groupId>
+        <artifactId>commons-compress</artifactId>
+        <version>${apache.commons.commons-compress.version}</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+  <build>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <version>${apache.maven.maven-compiler-plugin.version}</version>
+          <configuration>
+            <source>${java.version}</source>
+            <target>${java.version}</target>
+          </configuration>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-assembly-plugin</artifactId>
+          <version>${apache.maven.maven-assembly-plugin.version}</version>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+  </build>
+</project>

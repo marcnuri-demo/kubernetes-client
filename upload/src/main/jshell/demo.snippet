@@ -1,0 +1,50 @@
+import io.fabric8.kubernetes.api.model.ObjectMeta;
+import io.fabric8.kubernetes.api.model.Pod;
+import io.fabric8.kubernetes.client.DefaultKubernetesClient;
+import io.fabric8.openshift.client.OpenShiftClient;
+
+import java.nio.file.Path;
+import java.util.Arrays;
+
+OpenShiftClient oc = new DefaultKubernetesClient().adapt(OpenShiftClient.class);
+void listPods() {
+    oc.pods().list().getItems().stream()
+        .map(Pod::getMetadata)
+        .map(ObjectMeta::getName)
+        .forEach(System.out::println);
+}
+void createBusyBox() {
+    oc.pods().createNew()
+        .withNewSpec()
+            .addNewContainer()
+                .withImage("busybox")
+                .withName("busybox")
+                .withCommand(Arrays.asList("top"))
+            .endContainer()
+        .endSpec()
+        .withNewMetadata()
+            .withName("busybox")
+        .endMetadata()
+        .done();
+}
+void deleteBusyBox() {
+    oc.pods().withName("busybox").delete();
+}
+
+listPods();
+createBusyBox();
+
+oc.pods().withName("busybox")
+    .file("/tmp/uploaded-example.txt")
+    .upload(Path.of("D:\\00-MN\\projects\\marcnuri-demo\\kubernetes-client\\upload\\src\\test\\resources\\sample-upload-file.txt"));
+
+oc.pods().withName("busybox").writingOutput(System.out).exec("sh", "-c", "du -ha /tmp");
+
+deleteBusyBox();
+
+
+
+
+
+
+
