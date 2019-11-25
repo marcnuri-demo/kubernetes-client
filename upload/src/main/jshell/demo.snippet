@@ -4,9 +4,9 @@ import io.fabric8.kubernetes.client.DefaultKubernetesClient;
 import io.fabric8.openshift.client.OpenShiftClient;
 
 import java.nio.file.Path;
-import java.util.Arrays;
+import java.util.Collections;
 
-OpenShiftClient oc = new DefaultKubernetesClient().adapt(OpenShiftClient.class);
+    OpenShiftClient oc = new DefaultKubernetesClient().adapt(OpenShiftClient.class);
 void listPods() {
     oc.pods().list().getItems().stream()
         .map(Pod::getMetadata)
@@ -15,16 +15,16 @@ void listPods() {
 }
 void createBusyBox() {
     oc.pods().createNew()
-        .withNewSpec()
+          .withNewSpec()
             .addNewContainer()
-                .withImage("busybox")
-                .withName("busybox")
-                .withCommand(Arrays.asList("top"))
+              .withImage("busybox")
+              .withName("busybox")
+              .withCommand(Collections.singletonList("top"))
             .endContainer()
-        .endSpec()
-        .withNewMetadata()
+          .endSpec()
+          .withNewMetadata()
             .withName("busybox")
-        .endMetadata()
+          .endMetadata()
         .done();
 }
 void deleteBusyBox() {
