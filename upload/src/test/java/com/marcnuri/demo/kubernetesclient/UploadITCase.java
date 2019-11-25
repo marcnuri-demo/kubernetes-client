@@ -81,12 +81,12 @@ class UploadITCase {
         "[ -d /tmp/uploaded-dir ] && echo \"true\" || echo \"false\"");
     assertThat(directoryExists, is("true\n"));
     final String result = execCommand(oc.pods().withName("busybox"),
-        "du -ha /tmp/uploaded-dir");
-    assertThat(result, is("3.4M\t/tmp/uploaded-dir/nested-dir-2/big-file.txt\n" +
-        "0\t/tmp/uploaded-dir/nested-dir-2/empty-file.txt\n" +
-        "3.4M\t/tmp/uploaded-dir/nested-dir-2\n" +
-        "4.0K\t/tmp/uploaded-dir/nested-dir-1/file1.txt\n" +
+        "du -ha /tmp/uploaded-dir | sort -k 2");
+    assertThat(result, is("3.4M\t/tmp/uploaded-dir\n" +
         "8.0K\t/tmp/uploaded-dir/nested-dir-1\n" +
-        "3.4M\t/tmp/uploaded-dir\n"));
+        "4.0K\t/tmp/uploaded-dir/nested-dir-1/file1.txt\n" +
+        "3.4M\t/tmp/uploaded-dir/nested-dir-2\n" +
+        "3.4M\t/tmp/uploaded-dir/nested-dir-2/big-file.txt\n" +
+        "0\t/tmp/uploaded-dir/nested-dir-2/empty-file.txt\n"));
   }
 }

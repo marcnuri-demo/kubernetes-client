@@ -1,0 +1,27 @@
+name: Integration Tests
+
+on:
+  push:
+    branches:
+      - '**'
+
+jobs:
+  openshift:
+    name: Integration Tests using OpenShift Cluster
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        openshift: [v3.11.0]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+      - name: Setup OpenShift
+        uses: manusa/actions-setup-openshift@v1.0.1
+        with:
+          oc version: ${{ matrix.openshift }}
+      - name: Setup Java 12
+        uses: actions/setup-java@v1
+        with:
+          java-version: '12'
+      - name: Install and Run Integration Tests
+        run: mvn -B clean verify
