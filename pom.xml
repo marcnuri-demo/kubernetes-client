@@ -11,20 +11,21 @@
 
   <properties>
     <revision>0.0.1-SNAPSHOT</revision>
-    <java.version>12</java.version>
+    <java.version>11</java.version>
     <global.name>blog.marcnuri.com :: Kubernetes Client</global.name>
     <apache.maven.maven-compiler-plugin.version>3.8.1</apache.maven.maven-compiler-plugin.version>
     <apache.maven.maven-assembly-plugin.version>3.1.1</apache.maven.maven-assembly-plugin.version>
     <apache.commons.commons-lang3.version>3.9</apache.commons.commons-lang3.version>
     <apache.commons.commons-codec.version>1.13</apache.commons.commons-codec.version>
     <apache.commons.commons-compress.version>1.19</apache.commons.commons-compress.version>
-    <kubernetes-client.version>4.6.4</kubernetes-client.version>
+    <kubernetes-client.version>4.9.2</kubernetes-client.version>
     <junit.version>5.5.1</junit.version>
     <hamcrest.version>2.0.0.0</hamcrest.version>
     <awaitility.version>4.0.1</awaitility.version>
   </properties>
 
   <modules>
+    <module>exec</module>
     <module>upload</module>
   </modules>
 

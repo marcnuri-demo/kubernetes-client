@@ -54,7 +54,7 @@ class UploadITCase {
   }
 
   private static void deletePod() {
-    oc.pods().withName("busybox").delete();
+    oc.pods().withName("busybox").withGracePeriod(1L).delete();
     await().atMost(10, TimeUnit.SECONDS).until(() -> oc.pods().withName("busybox").get() == null);
   }
 
