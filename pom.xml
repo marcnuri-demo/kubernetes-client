@@ -27,6 +27,7 @@
 
   <modules>
     <module>exec</module>
+    <module>other</module>
     <module>run</module>
     <module>upload</module>
   </modules>
