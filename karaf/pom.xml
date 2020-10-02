@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>com.marcnuri.demo.kubernetes-client</groupId>
+    <artifactId>kubernetes-client-parent</artifactId>
+    <version>${revision}</version>
+    <relativePath>../pom.xml</relativePath>
+  </parent>
+
+  <artifactId>kubernetes-client-karaf</artifactId>
+  <name>${global.name} :: Karaf Demo</name>
+  <packaging>bundle</packaging>
+
+  <properties>
+    <kubernetes-client.bundle.version>${kubernetes-client.version}</kubernetes-client.bundle.version>
+    <jackson.bundle.version>2.11.2</jackson.bundle.version>
+    <jsr305.bundle.version>3.0.2</jsr305.bundle.version>
+    <snakeyaml.bundle.version>1.26</snakeyaml.bundle.version>
+    <zjsonpatch.bundle.version>0.3.0</zjsonpatch.bundle.version>
+    <generex.bundle.version>1.0.2_1</generex.bundle.version>
+    <automaton.bundle.version>1.11-8_1</automaton.bundle.version>
+    <conscrypt-openjdk.bundle.version>1.4.2_1</conscrypt-openjdk.bundle.version>
+    <okhttp.bundle.version>3.12.1_1</okhttp.bundle.version>
+    <okio.bundle.version>1.15.0_1</okio.bundle.version>
+  </properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>io.fabric8</groupId>
+      <artifactId>openshift-client</artifactId>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.karaf.features</groupId>
+      <artifactId>standard</artifactId>
+      <version>${karaf.version}</version>
+      <classifier>features</classifier>
+      <type>xml</type>
+    </dependency>
+  </dependencies>
+  <build>
+    <resources>
+      <resource>
+        <directory>src/main/resources</directory>
+        <filtering>true</filtering>
+      </resource>
+    </resources>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.felix</groupId>
+        <artifactId>maven-bundle-plugin</artifactId>
+        <extensions>true</extensions>
+        <configuration>
+          <instructions>
+            <Import-Package>
+              *
+            </Import-Package>
+          </instructions>
+        </configuration>
+      </plugin>
+      <!-- plugin goals have to be executed in order -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-install-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>default-install</id>
+            <goals>
+              <goal>install</goal>
+            </goals>
+            <phase>install</phase>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.karaf.tooling</groupId>
+        <artifactId>karaf-maven-plugin</artifactId>
+        <version>${karaf.version}</version>
+        <extensions>true</extensions>
+        <executions>
+          <execution>
+            <id>karaf-assembly</id>
+            <goals>
+              <goal>assembly</goal>
+            </goals>
+            <phase>install</phase>
+          </execution>
+        </executions>
+        <configuration>
+          <javase>11</javase>
+          <framework>framework</framework>
+          <useReferenceUrls>true</useReferenceUrls>
+          <archiveTarGz>false</archiveTarGz>
+          <includeBuildOutputDirectory>false</includeBuildOutputDirectory>
+          <startupFeatures>
+            <feature>framework</feature>
+            <feature>jaas</feature>
+            <feature>log</feature>
+            <feature>shell</feature>
+            <feature>bundle</feature>
+            <feature>feature</feature>
+            <feature>system</feature>
+            <feature>scr</feature>
+            <feature>management</feature>
+            <feature>aries-blueprint</feature>
+          </startupFeatures>
+          <startupBundles>
+            <bundle dependency='true'>mvn:com.google.code.findbugs/jsr305/${jsr305.bundle.version}</bundle>
+            <bundle dependency='true'>mvn:com.fasterxml.jackson.core/jackson-core/${jackson.bundle.version}</bundle>
+            <bundle dependency='true'>mvn:com.fasterxml.jackson.core/jackson-annotations/${jackson.bundle.version}</bundle>
+            <bundle dependency='true'>mvn:com.fasterxml.jackson.core/jackson-databind/${jackson.bundle.version}</bundle>
+            <bundle dependency='true'>mvn:com.fasterxml.jackson.dataformat/jackson-dataformat-yaml/${jackson.bundle.version}</bundle>
+            <bundle dependency='true'>mvn:com.fasterxml.jackson.datatype/jackson-datatype-jsr310/${jackson.bundle.version}</bundle>
+            <bundle dependency='true'>mvn:org.yaml/snakeyaml/${snakeyaml.bundle.version}</bundle>
+            <bundle dependency='true'>mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.generex/${generex.bundle.version}</bundle>
+            <bundle dependency='true'>mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.automaton/${automaton.bundle.version}</bundle>
+            <bundle dependency='true'>mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.conscrypt-openjdk/${conscrypt-openjdk.bundle.version}</bundle>
+            <bundle dependency='true'>mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.okhttp/${okhttp.bundle.version}</bundle>
+            <bundle dependency='true'>mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.okio/${okio.bundle.version}</bundle>
+            <bundle dependency='true'>mvn:org.apache.aries.spifly/org.apache.aries.spifly.dynamic.bundle/1.3.0</bundle>
+            <bundle dependency='true'>mvn:org.ow2.asm/asm/8.0.1</bundle>
+            <bundle dependency='true'>mvn:org.ow2.asm/asm-analysis/8.0.1</bundle>
+            <bundle dependency='true'>mvn:org.ow2.asm/asm-commons/8.0.1</bundle>
+            <bundle dependency='true'>mvn:org.ow2.asm/asm-tree/8.0.1</bundle>
+            <bundle dependency='true'>mvn:org.ow2.asm/asm-util/8.0.1</bundle>
+            <bundle dependency='true'>mvn:io.fabric8/zjsonpatch/${zjsonpatch.bundle.version}</bundle>
+            <bundle dependency='true'>mvn:io.fabric8/kubernetes-model-common/${kubernetes-client.bundle.version}</bundle>
+            <bundle dependency='true'>mvn:io.fabric8/kubernetes-model-core/${kubernetes-client.bundle.version}</bundle>
+            <bundle dependency='true'>mvn:io.fabric8/kubernetes-model-apps/${kubernetes-client.bundle.version}</bundle>
+            <bundle dependency='true'>mvn:io.fabric8/kubernetes-model-rbac/${kubernetes-client.bundle.version}</bundle>
+            <bundle dependency='true'>mvn:io.fabric8/kubernetes-model-admissionregistration/${kubernetes-client.bundle.version}</bundle>
+            <bundle dependency='true'>mvn:io.fabric8/kubernetes-model-apiextensions/${kubernetes-client.bundle.version}</bundle>
+            <bundle dependency='true'>mvn:io.fabric8/kubernetes-model-autoscaling/${kubernetes-client.bundle.version}</bundle>
+            <bundle dependency='true'>mvn:io.fabric8/kubernetes-model-batch/${kubernetes-client.bundle.version}</bundle>
+            <bundle dependency='true'>mvn:io.fabric8/kubernetes-model-certificates/${kubernetes-client.bundle.version}</bundle>
+            <bundle dependency='true'>mvn:io.fabric8/kubernetes-model-coordination/${kubernetes-client.bundle.version}</bundle>
+            <bundle dependency='true'>mvn:io.fabric8/kubernetes-model-discovery/${kubernetes-client.bundle.version}</bundle>
+            <bundle dependency='true'>mvn:io.fabric8/kubernetes-model-events/${kubernetes-client.bundle.version}</bundle>
+            <bundle dependency='true'>mvn:io.fabric8/kubernetes-model-extensions/${kubernetes-client.bundle.version}</bundle>
+            <bundle dependency='true'>mvn:io.fabric8/kubernetes-model-networking/${kubernetes-client.bundle.version}</bundle>
+            <bundle dependency='true'>mvn:io.fabric8/kubernetes-model-metrics/${kubernetes-client.bundle.version}</bundle>
+            <bundle dependency='true'>mvn:io.fabric8/kubernetes-model-policy/${kubernetes-client.bundle.version}</bundle>
+            <bundle dependency='true'>mvn:io.fabric8/kubernetes-model-scheduling/${kubernetes-client.bundle.version}</bundle>
+            <bundle dependency='true'>mvn:io.fabric8/kubernetes-model-settings/${kubernetes-client.bundle.version}</bundle>
+            <bundle dependency='true'>mvn:io.fabric8/kubernetes-model-storageclass/${kubernetes-client.bundle.version}</bundle>
+            <bundle dependency='true'>mvn:io.fabric8/kubernetes-client/${kubernetes-client.bundle.version}/jar/bundle</bundle>
+
+            <bundle dependency='true'>mvn:io.fabric8/openshift-model/${kubernetes-client.bundle.version}</bundle>
+            <bundle dependency='true'>mvn:io.fabric8/openshift-model-console/${kubernetes-client.bundle.version}</bundle>
+            <bundle dependency='true'>mvn:io.fabric8/openshift-model-monitoring/${kubernetes-client.bundle.version}</bundle>
+            <bundle dependency='true'>mvn:io.fabric8/openshift-model-operator/${kubernetes-client.bundle.version}</bundle>
+            <bundle dependency='true'>mvn:io.fabric8/openshift-model-operatorhub/${kubernetes-client.bundle.version}</bundle>
+            <bundle dependency='true'>mvn:io.fabric8/openshift-client/${kubernetes-client.bundle.version}/jar/bundle</bundle>
+
+            <bundle>mvn:${project.groupId}/${project.artifactId}/${project.version};start-level=80</bundle>
+          </startupBundles>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+</project>

@@ -28,6 +28,7 @@
 
   <modules>
     <module>exec</module>
+    <module>karaf</module>
     <module>other</module>
     <module>run</module>
     <module>upload</module>
