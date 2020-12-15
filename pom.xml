@@ -18,7 +18,7 @@
     <apache.commons.commons-lang3.version>3.9</apache.commons.commons-lang3.version>
     <apache.commons.commons-codec.version>1.13</apache.commons.commons-codec.version>
     <apache.commons.commons-compress.version>1.19</apache.commons.commons-compress.version>
-    <kubernetes-client.version>4.12.0</kubernetes-client.version>
+    <kubernetes-client.version>4.13.0</kubernetes-client.version>
     <karaf.version>4.2.8</karaf.version>
     <junit.version>5.5.1</junit.version>
     <hamcrest.version>2.0.0.0</hamcrest.version>
@@ -39,6 +39,11 @@
       <dependency>
         <groupId>io.fabric8</groupId>
         <artifactId>openshift-client</artifactId>
+        <version>${kubernetes-client.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>io.fabric8</groupId>
+        <artifactId>knative-client</artifactId>
         <version>${kubernetes-client.version}</version>
       </dependency>
       <dependency>
