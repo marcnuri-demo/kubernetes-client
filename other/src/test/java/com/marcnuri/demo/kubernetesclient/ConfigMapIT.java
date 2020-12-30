@@ -15,7 +15,7 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class ConfigMapIT {
+class ConfigMapIT {
 
   private static final String NAMESPACE = "default";
   private static final String APP_LABEL = "mn-kc-test-config-map";

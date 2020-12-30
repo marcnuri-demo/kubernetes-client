@@ -142,6 +142,7 @@
             <bundle dependency='true'>mvn:io.fabric8/kubernetes-model-extensions/${kubernetes-client.bundle.version}</bundle>
             <bundle dependency='true'>mvn:io.fabric8/kubernetes-model-networking/${kubernetes-client.bundle.version}</bundle>
             <bundle dependency='true'>mvn:io.fabric8/kubernetes-model-metrics/${kubernetes-client.bundle.version}</bundle>
+            <bundle dependency='true'>mvn:io.fabric8/kubernetes-model-node/${kubernetes-client.bundle.version}</bundle>
             <bundle dependency='true'>mvn:io.fabric8/kubernetes-model-policy/${kubernetes-client.bundle.version}</bundle>
             <bundle dependency='true'>mvn:io.fabric8/kubernetes-model-scheduling/${kubernetes-client.bundle.version}</bundle>
             <bundle dependency='true'>mvn:io.fabric8/kubernetes-model-settings/${kubernetes-client.bundle.version}</bundle>
