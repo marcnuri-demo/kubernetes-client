@@ -5,6 +5,7 @@
  */
 package com.marcnuri.demo.kubernetesclient;
 
+import io.fabric8.kubernetes.api.model.PodBuilder;
 import io.fabric8.kubernetes.client.DefaultKubernetesClient;
 import io.fabric8.openshift.client.OpenShiftClient;
 import org.junit.jupiter.api.AfterAll;
@@ -31,7 +32,8 @@ class UploadITCase {
   static void initEnvironment() {
     oc = new DefaultKubernetesClient().adapt(OpenShiftClient.class);
     deletePod();
-    oc.pods().createNew()
+    oc.pods().create(
+      new PodBuilder()
           .withNewSpec()
             .addNewContainer()
               .withImage("busybox")
@@ -42,7 +44,8 @@ class UploadITCase {
           .withNewMetadata()
             .withName("busybox")
           .endMetadata()
-        .done();
+        .build()
+    );
     await().atMost(10, TimeUnit.SECONDS).until(() ->
         oc.pods().withName("busybox").get().getStatus().getPhase().equals("Running"));
   }

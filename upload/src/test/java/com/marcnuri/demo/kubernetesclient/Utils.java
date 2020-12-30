@@ -5,7 +5,6 @@
  */
 package com.marcnuri.demo.kubernetesclient;
 
-import io.fabric8.kubernetes.api.model.DoneablePod;
 import io.fabric8.kubernetes.api.model.Pod;
 import io.fabric8.kubernetes.client.dsl.ExecListener;
 import io.fabric8.kubernetes.client.dsl.ExecWatch;
@@ -26,7 +25,7 @@ class Utils {
 
   }
 
-  static String execCommand(PodResource<Pod, DoneablePod> pod, String command) throws IOException, InterruptedException {
+  static String execCommand(PodResource<Pod> pod, String command) throws IOException, InterruptedException {
     try (
         final ByteArrayOutputStream result = new ByteArrayOutputStream()
     ) {
