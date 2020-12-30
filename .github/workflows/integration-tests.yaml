@@ -16,7 +16,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v1
       - name: Setup OpenShift
-        uses: manusa/actions-setup-openshift@v1.0.1
+        uses: manusa/actions-setup-openshift@v1.1.2
         with:
           oc version: ${{ matrix.openshift }}
       - name: Setup Java 12
