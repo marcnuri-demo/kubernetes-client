@@ -17,13 +17,9 @@ import java.nio.charset.StandardCharsets;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
-/**
- * Created by Marc Nuri <marc@marcnuri.com> on 2019-11-25.
- */
 class Utils {
-  private Utils() {
 
-  }
+  private Utils() {}
 
   static String execCommand(PodResource<Pod> pod, String command) throws IOException, InterruptedException {
     try (
