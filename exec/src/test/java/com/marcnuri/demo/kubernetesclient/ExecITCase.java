@@ -2,8 +2,8 @@ package com.marcnuri.demo.kubernetesclient;
 
 import io.fabric8.kubernetes.api.model.PodBuilder;
 import io.fabric8.kubernetes.client.DefaultKubernetesClient;
+import io.fabric8.kubernetes.client.KubernetesClient;
 import io.fabric8.kubernetes.client.dsl.ExecListener;
-import io.fabric8.openshift.client.OpenShiftClient;
 import okhttp3.Response;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
@@ -21,13 +21,13 @@ import static org.hamcrest.core.Is.is;
 
 class ExecITCase {
 
-  private static OpenShiftClient oc;
+  private static KubernetesClient kc;
 
   @BeforeAll
   static void initEnvironment() {
-    oc = new DefaultKubernetesClient().adapt(OpenShiftClient.class);
+    kc = new DefaultKubernetesClient();
     deletePod();
-    oc.pods().create(
+    kc.pods().create(
       new PodBuilder()
           .withNewSpec()
             .addNewContainer()
@@ -42,18 +42,18 @@ class ExecITCase {
       .build()
     );
     await().atMost(10, TimeUnit.SECONDS).until(() ->
-        oc.pods().withName("busybox").get().getStatus().getPhase().equals("Running"));
+      kc.pods().withName("busybox").get().getStatus().getPhase().equals("Running"));
   }
 
   @AfterAll
   static void tearDown() {
     deletePod();
-    oc = null;
+    kc = null;
   }
 
   private static void deletePod() {
-    oc.pods().withName("busybox").withGracePeriod(1L).delete();
-    await().atMost(10, TimeUnit.SECONDS).until(() -> oc.pods().withName("busybox").get() == null);
+    kc.pods().withName("busybox").withGracePeriod(1L).delete();
+    await().atMost(10, TimeUnit.SECONDS).until(() -> kc.pods().withName("busybox").get() == null);
   }
 
   @Test
@@ -79,7 +79,7 @@ class ExecITCase {
       final ByteArrayOutputStream result = new ByteArrayOutputStream()
     ) {
       // When
-      oc.pods().withName("busybox")
+      kc.pods().withName("busybox")
         .redirectingInput().writingOutput(result)
         .usingListener(waitToComplete)
         .exec("sh", "-c", "sleep 8 && echo hello");
