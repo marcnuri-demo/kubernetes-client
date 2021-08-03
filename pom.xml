@@ -19,7 +19,7 @@
     <apache.commons.commons-codec.version>1.13</apache.commons.commons-codec.version>
     <apache.commons.commons-compress.version>1.21</apache.commons.commons-compress.version>
     <kubernetes-client.version>5.0.0</kubernetes-client.version>
-    <karaf.version>4.2.8</karaf.version>
+    <karaf.version>4.3.2</karaf.version>
     <junit.version>5.5.1</junit.version>
     <hamcrest.version>2.0.0.0</hamcrest.version>
     <assertj.version>3.17.0</assertj.version>
