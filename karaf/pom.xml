@@ -129,10 +129,10 @@
             <bundle dependency='true'>mvn:io.fabric8/zjsonpatch/${zjsonpatch.bundle.version}</bundle>
             <bundle dependency='true'>mvn:io.fabric8/kubernetes-model-common/${kubernetes-client.bundle.version}</bundle>
             <bundle dependency='true'>mvn:io.fabric8/kubernetes-model-core/${kubernetes-client.bundle.version}</bundle>
-            <bundle dependency='true'>mvn:io.fabric8/kubernetes-model-apps/${kubernetes-client.bundle.version}</bundle>
             <bundle dependency='true'>mvn:io.fabric8/kubernetes-model-rbac/${kubernetes-client.bundle.version}</bundle>
             <bundle dependency='true'>mvn:io.fabric8/kubernetes-model-admissionregistration/${kubernetes-client.bundle.version}</bundle>
             <bundle dependency='true'>mvn:io.fabric8/kubernetes-model-apiextensions/${kubernetes-client.bundle.version}</bundle>
+            <bundle dependency='true'>mvn:io.fabric8/kubernetes-model-apps/${kubernetes-client.bundle.version}</bundle>
             <bundle dependency='true'>mvn:io.fabric8/kubernetes-model-autoscaling/${kubernetes-client.bundle.version}</bundle>
             <bundle dependency='true'>mvn:io.fabric8/kubernetes-model-batch/${kubernetes-client.bundle.version}</bundle>
             <bundle dependency='true'>mvn:io.fabric8/kubernetes-model-certificates/${kubernetes-client.bundle.version}</bundle>
@@ -140,20 +140,27 @@
             <bundle dependency='true'>mvn:io.fabric8/kubernetes-model-discovery/${kubernetes-client.bundle.version}</bundle>
             <bundle dependency='true'>mvn:io.fabric8/kubernetes-model-events/${kubernetes-client.bundle.version}</bundle>
             <bundle dependency='true'>mvn:io.fabric8/kubernetes-model-extensions/${kubernetes-client.bundle.version}</bundle>
+            <bundle dependency='true'>mvn:io.fabric8/kubernetes-model-flowcontrol/${kubernetes-client.bundle.version}</bundle>
             <bundle dependency='true'>mvn:io.fabric8/kubernetes-model-networking/${kubernetes-client.bundle.version}</bundle>
-            <bundle dependency='true'>mvn:io.fabric8/kubernetes-model-metrics/${kubernetes-client.bundle.version}</bundle>
             <bundle dependency='true'>mvn:io.fabric8/kubernetes-model-node/${kubernetes-client.bundle.version}</bundle>
+            <bundle dependency='true'>mvn:io.fabric8/kubernetes-model-metrics/${kubernetes-client.bundle.version}</bundle>
             <bundle dependency='true'>mvn:io.fabric8/kubernetes-model-policy/${kubernetes-client.bundle.version}</bundle>
             <bundle dependency='true'>mvn:io.fabric8/kubernetes-model-scheduling/${kubernetes-client.bundle.version}</bundle>
-            <bundle dependency='true'>mvn:io.fabric8/kubernetes-model-settings/${kubernetes-client.bundle.version}</bundle>
             <bundle dependency='true'>mvn:io.fabric8/kubernetes-model-storageclass/${kubernetes-client.bundle.version}</bundle>
             <bundle dependency='true'>mvn:io.fabric8/kubernetes-client/${kubernetes-client.bundle.version}/jar/bundle</bundle>
 
             <bundle dependency='true'>mvn:io.fabric8/openshift-model/${kubernetes-client.bundle.version}</bundle>
-            <bundle dependency='true'>mvn:io.fabric8/openshift-model-console/${kubernetes-client.bundle.version}</bundle>
-            <bundle dependency='true'>mvn:io.fabric8/openshift-model-monitoring/${kubernetes-client.bundle.version}</bundle>
+            <bundle dependency='true'>mvn:io.fabric8/openshift-model-clusterautoscaling/${kubernetes-client.bundle.version}</bundle>
             <bundle dependency='true'>mvn:io.fabric8/openshift-model-operator/${kubernetes-client.bundle.version}</bundle>
             <bundle dependency='true'>mvn:io.fabric8/openshift-model-operatorhub/${kubernetes-client.bundle.version}</bundle>
+            <bundle dependency='true'>mvn:io.fabric8/openshift-model-machine/${kubernetes-client.bundle.version}</bundle>
+            <bundle dependency='true'>mvn:io.fabric8/openshift-model-monitoring/${kubernetes-client.bundle.version}</bundle>
+            <bundle dependency='true'>mvn:io.fabric8/openshift-model-console/${kubernetes-client.bundle.version}</bundle>
+            <bundle dependency='true'>mvn:io.fabric8/openshift-model-machineconfig/${kubernetes-client.bundle.version}</bundle>
+            <bundle dependency='true'>mvn:io.fabric8/openshift-model-tuned/${kubernetes-client.bundle.version}</bundle>
+            <bundle dependency='true'>mvn:io.fabric8/openshift-model-whereabouts/${kubernetes-client.bundle.version}</bundle>
+            <bundle dependency='true'>mvn:io.fabric8/openshift-model-storageversionmigrator/${kubernetes-client.bundle.version}</bundle>
+            <bundle dependency='true'>mvn:io.fabric8/openshift-model-miscellaneous/${kubernetes-client.bundle.version}</bundle>
             <bundle dependency='true'>mvn:io.fabric8/openshift-client/${kubernetes-client.bundle.version}/jar/bundle</bundle>
 
             <bundle>mvn:${project.groupId}/${project.artifactId}/${project.version};start-level=80</bundle>
