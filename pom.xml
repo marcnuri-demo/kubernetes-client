@@ -15,6 +15,7 @@
     <global.name>blog.marcnuri.com :: Kubernetes Client</global.name>
     <apache.maven.maven-compiler-plugin.version>3.8.1</apache.maven.maven-compiler-plugin.version>
     <apache.maven.maven-assembly-plugin.version>3.1.1</apache.maven.maven-assembly-plugin.version>
+    <apache.maven.maven-surefire-plugin.version>3.0.0-M5</apache.maven.maven-surefire-plugin.version>
     <apache.commons.commons-lang3.version>3.9</apache.commons.commons-lang3.version>
     <apache.commons.commons-codec.version>1.13</apache.commons.commons-codec.version>
     <apache.commons.commons-compress.version>1.21</apache.commons.commons-compress.version>
@@ -27,6 +28,7 @@
   </properties>
 
   <modules>
+    <module>crd</module>
     <module>exec</module>
     <module>karaf</module>
     <module>other</module>
@@ -74,6 +76,12 @@
         <scope>test</scope>
       </dependency>
       <dependency>
+        <groupId>io.fabric8</groupId>
+        <artifactId>kubernetes-server-mock</artifactId>
+        <version>${kubernetes-client.version}</version>
+        <scope>test</scope>
+      </dependency>
+      <dependency>
         <groupId>org.hamcrest</groupId>
         <artifactId>java-hamcrest</artifactId>
         <version>${hamcrest.version}</version>
@@ -103,6 +111,11 @@
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-assembly-plugin</artifactId>
           <version>${apache.maven.maven-assembly-plugin.version}</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-surefire-plugin</artifactId>
+          <version>${apache.maven.maven-surefire-plugin.version}</version>
         </plugin>
       </plugins>
     </pluginManagement>
