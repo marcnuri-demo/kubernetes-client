@@ -61,9 +61,6 @@ class ExecITCase {
     // Given
     final CountDownLatch cdl = new CountDownLatch(1);
     final ExecListener waitToComplete = new ExecListener() {
-      @Override
-      public void onOpen(Response response) {
-      }
 
       @Override
       public void onFailure(Throwable t, Response response) {

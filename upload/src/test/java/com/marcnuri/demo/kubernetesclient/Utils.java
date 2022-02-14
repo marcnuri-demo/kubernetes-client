@@ -9,7 +9,6 @@ import io.fabric8.kubernetes.api.model.Pod;
 import io.fabric8.kubernetes.client.dsl.ExecListener;
 import io.fabric8.kubernetes.client.dsl.ExecWatch;
 import io.fabric8.kubernetes.client.dsl.PodResource;
-import okhttp3.Response;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -27,7 +26,7 @@ class Utils {
     ) {
       final CountDownLatch cdl = new CountDownLatch(1);
       final ExecWatch ew = pod.redirectingInput().writingOutput(result)
-          .usingListener(new AdaptedExecListener() {
+          .usingListener(new ExecListener() {
             @Override
             public void onFailure(Throwable t, Response response) {
               cdl.countDown();
@@ -42,20 +41,6 @@ class Utils {
       ew.getInput().write(String.format("%s\nexit\n", command).getBytes());
       cdl.await(10, TimeUnit.SECONDS);
       return result.toString(StandardCharsets.UTF_8.name());
-    }
-  }
-
-  private interface AdaptedExecListener extends ExecListener {
-    @Override
-    default void onOpen(Response response) {
-    }
-
-    @Override
-    default void onFailure(Throwable t, Response response) {
-    }
-
-    @Override
-    default void onClose(int code, String reason) {
     }
   }
 }

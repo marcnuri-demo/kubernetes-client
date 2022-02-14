@@ -16,9 +16,9 @@
 
   <properties>
     <kubernetes-client.bundle.version>${kubernetes-client.version}</kubernetes-client.bundle.version>
-    <jackson.bundle.version>2.11.2</jackson.bundle.version>
+    <jackson.bundle.version>2.13.0</jackson.bundle.version>
     <jsr305.bundle.version>3.0.2</jsr305.bundle.version>
-    <snakeyaml.bundle.version>1.26</snakeyaml.bundle.version>
+    <snakeyaml.bundle.version>1.28</snakeyaml.bundle.version>
     <zjsonpatch.bundle.version>0.3.0</zjsonpatch.bundle.version>
     <generex.bundle.version>1.0.2_1</generex.bundle.version>
     <automaton.bundle.version>1.11-8_1</automaton.bundle.version>
@@ -161,6 +161,7 @@
             <bundle dependency='true'>mvn:io.fabric8/openshift-model-whereabouts/${kubernetes-client.bundle.version}</bundle>
             <bundle dependency='true'>mvn:io.fabric8/openshift-model-storageversionmigrator/${kubernetes-client.bundle.version}</bundle>
             <bundle dependency='true'>mvn:io.fabric8/openshift-model-miscellaneous/${kubernetes-client.bundle.version}</bundle>
+            <bundle dependency='true'>mvn:io.fabric8/openshift-model-hive/${kubernetes-client.bundle.version}</bundle>
             <bundle dependency='true'>mvn:io.fabric8/openshift-client/${kubernetes-client.bundle.version}/jar/bundle</bundle>
 
             <bundle>mvn:${project.groupId}/${project.artifactId}/${project.version};start-level=80</bundle>
