@@ -2,7 +2,7 @@ package com.marcnuri.demo.kubernetesclient.karaf;
 
 import io.fabric8.kubernetes.api.model.HasMetadata;
 import io.fabric8.kubernetes.api.model.ObjectMeta;
-import io.fabric8.kubernetes.client.DefaultKubernetesClient;
+import io.fabric8.kubernetes.client.KubernetesClientBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -12,7 +12,7 @@ public class KarafApplication {
 
   public void init() {
     log.info("Karaf Application has started");
-    try (final var kubernetesClient = new DefaultKubernetesClient()) {
+    try (final var kubernetesClient = new KubernetesClientBuilder().build()) {
       log.info("Available nodes:");
       kubernetesClient.nodes().list().getItems().stream()
         .map(HasMetadata::getMetadata)

@@ -1,5 +1,8 @@
 ## Building project
 
+### Requirements
+- Must be run in **Java 11** (Not Java 17, Not Java 8)
+
 Following command will create a Karaf assembly in `target/assembly`:
 ```shell script
 $ mvn clean install

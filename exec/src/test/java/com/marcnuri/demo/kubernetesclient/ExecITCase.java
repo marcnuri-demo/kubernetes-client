@@ -1,10 +1,9 @@
 package com.marcnuri.demo.kubernetesclient;
 
 import io.fabric8.kubernetes.api.model.PodBuilder;
-import io.fabric8.kubernetes.client.DefaultKubernetesClient;
 import io.fabric8.kubernetes.client.KubernetesClient;
+import io.fabric8.kubernetes.client.KubernetesClientBuilder;
 import io.fabric8.kubernetes.client.dsl.ExecListener;
-import okhttp3.Response;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -25,9 +24,9 @@ class ExecITCase {
 
   @BeforeAll
   static void initEnvironment() {
-    kc = new DefaultKubernetesClient();
+    kc = new KubernetesClientBuilder().build();
     deletePod();
-    kc.pods().create(
+    kc.pods().resource(
       new PodBuilder()
           .withNewSpec()
             .addNewContainer()
@@ -40,7 +39,7 @@ class ExecITCase {
             .withName("busybox")
           .endMetadata()
       .build()
-    );
+    ).create();
     await().atMost(10, TimeUnit.SECONDS).until(() ->
       kc.pods().withName("busybox").get().getStatus().getPhase().equals("Running"));
   }
@@ -82,7 +81,7 @@ class ExecITCase {
         .exec("sh", "-c", "sleep 8 && echo hello");
       cdl.await(10, TimeUnit.SECONDS);
       // Then
-      assertThat(result.toString(StandardCharsets.UTF_8.name()), is("hello\n"));
+      assertThat(result.toString(StandardCharsets.UTF_8), is("hello\n"));
     }
   }
 }
