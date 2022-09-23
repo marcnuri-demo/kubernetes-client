@@ -6,8 +6,8 @@
 package com.marcnuri.demo.kubernetesclient;
 
 import io.fabric8.kubernetes.api.model.PodBuilder;
-import io.fabric8.kubernetes.client.DefaultKubernetesClient;
 import io.fabric8.kubernetes.client.KubernetesClient;
+import io.fabric8.kubernetes.client.KubernetesClientBuilder;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -30,9 +30,9 @@ class UploadITCase {
   @BeforeAll
   static void initEnvironment() {
     name = "busybox-upload-" + System.currentTimeMillis();
-    kc = new DefaultKubernetesClient();
+    kc = new KubernetesClientBuilder().build();
     deletePod();
-    kc.pods().create(
+    kc.pods().resource(
       new PodBuilder()
           .withNewSpec()
             .addNewContainer()
@@ -45,7 +45,7 @@ class UploadITCase {
             .withName(name)
           .endMetadata()
         .build()
-    );
+    ).create();
     await().atMost(10, TimeUnit.SECONDS).until(() ->
       kc.pods().withName(name).get().getStatus().getPhase().equals("Running"));
   }

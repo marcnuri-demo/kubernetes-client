@@ -3,8 +3,8 @@ package com.marcnuri.demo.kubernetesclient;
 import io.fabric8.kubernetes.api.model.ConfigMap;
 import io.fabric8.kubernetes.api.model.ConfigMapBuilder;
 import io.fabric8.kubernetes.api.model.HasMetadata;
-import io.fabric8.kubernetes.client.DefaultKubernetesClient;
 import io.fabric8.kubernetes.client.KubernetesClient;
+import io.fabric8.kubernetes.client.KubernetesClientBuilder;
 import org.assertj.core.api.InstanceOfAssertFactories;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
@@ -24,7 +24,7 @@ class ConfigMapIT {
 
   @BeforeAll
   static void initEnvironment() {
-    kc = new DefaultKubernetesClient();
+    kc = new KubernetesClientBuilder().build();
   }
 
   @AfterAll
@@ -44,10 +44,10 @@ class ConfigMapIT {
       .endMetadata()
       .build();
     // @formatter:on
-    final ConfigMap original = kc.configMaps().inNamespace(NAMESPACE).withName("kc-simple-config-map").create(cm);
+    final ConfigMap original = kc.configMaps().inNamespace(NAMESPACE).resource(cm).create();
     cm.setData(Collections.singletonMap("NEW_VAR", "NEW"));
     // When
-    final ConfigMap replaced = kc.configMaps().inNamespace(NAMESPACE).createOrReplace(cm);
+    final ConfigMap replaced = kc.configMaps().inNamespace(NAMESPACE).resource(cm).createOrReplace();
     // Then
     assertThat(replaced)
       .isNotEqualTo(original)

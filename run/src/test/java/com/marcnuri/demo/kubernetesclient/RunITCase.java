@@ -1,8 +1,8 @@
 package com.marcnuri.demo.kubernetesclient;
 
 import io.fabric8.kubernetes.api.model.Pod;
-import io.fabric8.kubernetes.client.DefaultKubernetesClient;
 import io.fabric8.kubernetes.client.KubernetesClient;
+import io.fabric8.kubernetes.client.KubernetesClientBuilder;
 import io.fabric8.kubernetes.client.extended.run.RunConfigBuilder;
 import io.fabric8.kubernetes.client.extended.run.RunOperations;
 import org.junit.jupiter.api.AfterAll;
@@ -23,7 +23,7 @@ class RunITCase {
 
   @BeforeAll
   static void initEnvironment() {
-    kc = new DefaultKubernetesClient();
+    kc = new KubernetesClientBuilder().build();
   }
 
   @AfterAll

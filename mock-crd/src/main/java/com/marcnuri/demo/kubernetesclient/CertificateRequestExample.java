@@ -33,12 +33,12 @@ public class CertificateRequestExample {
         certClient.inNamespace(certNamespace).withName(certRequestName).get();
       if (certificateRequest == null) {
         log.info(
-          "CertificateRequest {} in certNamespce {} is a new one.",
+          "CertificateRequest {} in certNamespace {} is a new one.",
           certRequestName, certNamespace);
       } else {
         certClient.inNamespace(certNamespace).withName(certRequestName).delete();
         log.info(
-          "Delete existing CertificateRequest {} in certNamespce {}, then create a new one.",
+          "Delete existing CertificateRequest {} in certNamespace {}, then create a new one.",
           certRequestName, certNamespace);
       }
     } catch (Exception exception) {

@@ -11,7 +11,7 @@
   </parent>
 
   <artifactId>kubernetes-client-crd</artifactId>
-  <name>${global.name} :: CRD Demo</name>
+  <name>${global.name} :: Mock :: CRD Demo</name>
 
   <dependencies>
     <dependency>

@@ -20,27 +20,30 @@ class Utils {
 
   private Utils() {}
 
-  static String execCommand(PodResource<Pod> pod, String command) throws IOException, InterruptedException {
+  static String execCommand(PodResource pod, String command) throws IOException, InterruptedException {
     try (
         final ByteArrayOutputStream result = new ByteArrayOutputStream()
     ) {
       final CountDownLatch cdl = new CountDownLatch(1);
-      final ExecWatch ew = pod.redirectingInput().writingOutput(result)
-          .usingListener(new ExecListener() {
-            @Override
-            public void onFailure(Throwable t, Response response) {
-              cdl.countDown();
-            }
+      final ExecWatch ew = pod
+        .redirectingInput()
+        .writingOutput(result)
+        .usingListener(new ExecListener() {
+          @Override
+          public void onFailure(Throwable t, Response response) {
+            cdl.countDown();
+          }
 
-            @Override
-            public void onClose(int code, String reason) {
-              cdl.countDown();
-            }
-          })
-          .exec("sh");
+          @Override
+          public void onClose(int code, String reason) {
+            cdl.countDown();
+          }
+        })
+        .exec("sh");
       ew.getInput().write(String.format("%s\nexit\n", command).getBytes());
+      ew.getInput().flush();
       cdl.await(10, TimeUnit.SECONDS);
-      return result.toString(StandardCharsets.UTF_8.name());
+      return result.toString(StandardCharsets.UTF_8);
     }
   }
 }
