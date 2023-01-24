@@ -40,8 +40,10 @@
     <dependencies>
       <dependency>
         <groupId>io.fabric8</groupId>
-        <artifactId>openshift-client</artifactId>
+        <artifactId>kubernetes-client-bom</artifactId>
         <version>${kubernetes-client.version}</version>
+        <scope>import</scope>
+        <type>pom</type>
       </dependency>
       <dependency>
         <groupId>io.fabric8</groupId>
