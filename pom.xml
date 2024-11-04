@@ -16,11 +16,14 @@
     <apache.maven.maven-compiler-plugin.version>3.8.1</apache.maven.maven-compiler-plugin.version>
     <apache.maven.maven-assembly-plugin.version>3.1.1</apache.maven.maven-assembly-plugin.version>
     <apache.maven.maven-surefire-plugin.version>3.0.0-M5</apache.maven.maven-surefire-plugin.version>
-    <apache.commons.commons-lang3.version>3.9</apache.commons.commons-lang3.version>
-    <apache.commons.commons-codec.version>1.13</apache.commons.commons-codec.version>
-    <apache.commons.commons-compress.version>1.21</apache.commons.commons-compress.version>
+    <apache.commons.commons-compress.version>1.27.1</apache.commons.commons-compress.version>
+    <jackson.bundle.version>2.17.1</jackson.bundle.version>
     <kubernetes-client.version>6.13.4</kubernetes-client.version>
-    <karaf.version>4.4.1</karaf.version>
+    <kubernetes-client.bundle.version>${kubernetes-client.version}</kubernetes-client.bundle.version>
+    <karaf.version>4.4.6</karaf.version>
+    <slf4j.version>1.7.36</slf4j.version>
+    <snakeyaml.version>2.8</snakeyaml.version>
+    <snakeyaml.bundle.version>2.2</snakeyaml.bundle.version>
     <junit.version>5.5.1</junit.version>
     <hamcrest.version>2.0.0.0</hamcrest.version>
     <assertj.version>3.17.0</assertj.version>
@@ -52,18 +55,13 @@
       </dependency>
       <dependency>
         <groupId>org.apache.commons</groupId>
-        <artifactId>commons-lang3</artifactId>
-        <version>${apache.commons.commons-lang3.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>commons-codec</groupId>
-        <artifactId>commons-codec</artifactId>
-        <version>${apache.commons.commons-codec.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.commons</groupId>
         <artifactId>commons-compress</artifactId>
         <version>${apache.commons.commons-compress.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.slf4j</groupId>
+        <artifactId>slf4j-simple</artifactId>
+        <version>${slf4j.version}</version>
       </dependency>
       <dependency>
         <groupId>org.junit.jupiter</groupId>

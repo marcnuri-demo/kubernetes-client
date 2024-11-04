@@ -15,19 +15,18 @@
   <packaging>bundle</packaging>
 
   <properties>
-    <kubernetes-client.bundle.version>${kubernetes-client.version}</kubernetes-client.bundle.version>
-    <jackson.bundle.version>2.13.0</jackson.bundle.version>
     <jsr305.bundle.version>3.0.2</jsr305.bundle.version>
-    <snakeyaml.bundle.version>1.32</snakeyaml.bundle.version>
     <zjsonpatch.bundle.version>0.3.0</zjsonpatch.bundle.version>
     <generex.bundle.version>1.0.2_1</generex.bundle.version>
     <automaton.bundle.version>1.11-8_1</automaton.bundle.version>
     <conscrypt-openjdk.bundle.version>1.4.2_1</conscrypt-openjdk.bundle.version>
-    <okhttp.bundle.version>3.12.1_1</okhttp.bundle.version>
-    <okio.bundle.version>1.15.0_1</okio.bundle.version>
   </properties>
 
   <dependencies>
+    <dependency>
+      <groupId>io.fabric8</groupId>
+      <artifactId>kubernetes-httpclient-jdk</artifactId>
+    </dependency>
     <dependency>
       <groupId>io.fabric8</groupId>
       <artifactId>openshift-client</artifactId>
@@ -115,11 +114,10 @@
             <bundle dependency='true'>mvn:com.fasterxml.jackson.dataformat/jackson-dataformat-yaml/${jackson.bundle.version}</bundle>
             <bundle dependency='true'>mvn:com.fasterxml.jackson.datatype/jackson-datatype-jsr310/${jackson.bundle.version}</bundle>
             <bundle dependency='true'>mvn:org.yaml/snakeyaml/${snakeyaml.bundle.version}</bundle>
+            <bundle dependency='true'>mvn:org.snakeyaml/snakeyaml-engine/${snakeyaml.version}</bundle>
             <bundle dependency='true'>mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.generex/${generex.bundle.version}</bundle>
             <bundle dependency='true'>mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.automaton/${automaton.bundle.version}</bundle>
             <bundle dependency='true'>mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.conscrypt-openjdk/${conscrypt-openjdk.bundle.version}</bundle>
-            <bundle dependency='true'>mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.okhttp/${okhttp.bundle.version}</bundle>
-            <bundle dependency='true'>mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.okio/${okio.bundle.version}</bundle>
             <bundle dependency='true'>mvn:org.apache.aries.spifly/org.apache.aries.spifly.dynamic.bundle/1.3.0</bundle>
             <bundle dependency='true'>mvn:org.ow2.asm/asm/8.0.1</bundle>
             <bundle dependency='true'>mvn:org.ow2.asm/asm-analysis/8.0.1</bundle>
@@ -145,9 +143,10 @@
             <bundle dependency='true'>mvn:io.fabric8/kubernetes-model-node/${kubernetes-client.bundle.version}</bundle>
             <bundle dependency='true'>mvn:io.fabric8/kubernetes-model-metrics/${kubernetes-client.bundle.version}</bundle>
             <bundle dependency='true'>mvn:io.fabric8/kubernetes-model-policy/${kubernetes-client.bundle.version}</bundle>
+            <bundle dependency='true'>mvn:io.fabric8/kubernetes-model-resource/${kubernetes-client.bundle.version}</bundle>
             <bundle dependency='true'>mvn:io.fabric8/kubernetes-model-scheduling/${kubernetes-client.bundle.version}</bundle>
             <bundle dependency='true'>mvn:io.fabric8/kubernetes-model-storageclass/${kubernetes-client.bundle.version}</bundle>
-            <bundle dependency='true'>mvn:io.fabric8/kubernetes-httpclient-okhttp/${kubernetes-client.bundle.version}/jar/bundle</bundle>
+            <bundle dependency='true'>mvn:io.fabric8/kubernetes-httpclient-jdk/${kubernetes-client.bundle.version}/jar/bundle</bundle>
             <bundle dependency='true'>mvn:io.fabric8/kubernetes-client/${kubernetes-client.bundle.version}/jar/bundle</bundle>
             <bundle dependency='true'>mvn:io.fabric8/kubernetes-client-api/${kubernetes-client.bundle.version}/jar/bundle</bundle>
 
