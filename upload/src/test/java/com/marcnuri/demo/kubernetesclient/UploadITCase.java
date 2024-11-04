@@ -14,7 +14,6 @@ import org.junit.jupiter.api.Test;
 
 import java.nio.file.Path;
 import java.util.Collections;
-import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 import static com.marcnuri.demo.kubernetesclient.Utils.execCommand;
@@ -56,8 +55,9 @@ class UploadITCase {
   }
 
   private static void deletePod() {
-    kc.pods().withName(name).withGracePeriod(1L).delete();
-    kc.pods().withName(name).waitUntilCondition(Objects::isNull, 10, TimeUnit.SECONDS);
+    kc.pods().withName(name).withGracePeriod(0L).delete();
+    kc.pods().withName(name).waitUntilCondition(p ->
+      p == null || p.getMetadata().getDeletionTimestamp() != null, 10, TimeUnit.SECONDS);
   }
 
   @Test

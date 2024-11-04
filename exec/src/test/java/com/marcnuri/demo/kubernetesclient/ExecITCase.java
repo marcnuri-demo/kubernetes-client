@@ -11,7 +11,6 @@ import org.junit.jupiter.api.Test;
 import java.io.ByteArrayOutputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.Collections;
-import java.util.Objects;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
@@ -51,7 +50,8 @@ class ExecITCase {
 
   private static void deletePod() {
     kc.pods().withName("busybox").withGracePeriod(1L).delete();
-    kc.pods().withName("busybox").waitUntilCondition(Objects::isNull, 10, TimeUnit.SECONDS);
+    kc.pods().withName("busybox").waitUntilCondition(p ->
+      p == null || p.getMetadata().getDeletionTimestamp() != null, 10, TimeUnit.SECONDS);
   }
 
   @Test
