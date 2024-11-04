@@ -2,9 +2,11 @@ package com.hashicorp.secrets.v1beta1;
 
 import io.fabric8.junit.jupiter.api.KubernetesTest;
 import io.fabric8.kubernetes.api.model.HasMetadata;
+import io.fabric8.kubernetes.api.model.apiextensions.v1.CustomResourceDefinition;
 import io.fabric8.kubernetes.client.KubernetesClient;
 import io.fabric8.kubernetes.client.dsl.NonDeletingOperation;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assumptions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -21,6 +23,7 @@ class VaultConnectionTest {
 
   @BeforeEach
   void setUp() throws Exception {
+    Assumptions.assumeTrue(client.supports(CustomResourceDefinition.class), "CRDs are not supported in this cluster");
     try (InputStream is = VaultConnectionTest.class.getResourceAsStream("/vault-connection.yaml")) {
       client.resource(is).createOr(NonDeletingOperation::update);
     }
