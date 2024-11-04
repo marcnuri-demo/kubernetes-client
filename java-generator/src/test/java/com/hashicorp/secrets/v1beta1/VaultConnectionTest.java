@@ -9,6 +9,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.InputStream;
+import java.util.Objects;
+import java.util.concurrent.TimeUnit;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -22,14 +24,14 @@ class VaultConnectionTest {
     try (InputStream is = VaultConnectionTest.class.getResourceAsStream("/vault-connection.yaml")) {
       client.resource(is).createOr(NonDeletingOperation::update);
     }
-    // If necessary we can wait for the CRD to be ready:
-//    client.apiextensions().v1().customResourceDefinitions().waitUntilCondition(c -> {
-//      if (!Objects.equals(c.getMetadata().getName(), "vaultconnections.secrets.hashicorp.com")) {
-//        return false;
-//      }
-//      return c.getStatus().getConditions().stream()
-//        .anyMatch(cond -> Objects.equals(cond.getType(), "Established") && Objects.equals(cond.getStatus(), "True"));
-//    }, 10, TimeUnit.SECONDS);
+    // Wait until the CRD is ready and API can accept our custom resources
+    client.apiextensions().v1().customResourceDefinitions().waitUntilCondition(c -> {
+      if (!Objects.equals(c.getMetadata().getName(), "vaultconnections.secrets.hashicorp.com")) {
+        return false;
+      }
+      return c.getStatus().getConditions().stream()
+        .anyMatch(cond -> Objects.equals(cond.getType(), "Established") && Objects.equals(cond.getStatus(), "True"));
+    }, 10, TimeUnit.SECONDS);
   }
 
   @AfterEach
