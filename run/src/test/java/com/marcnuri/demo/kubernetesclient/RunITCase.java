@@ -35,16 +35,15 @@ class RunITCase {
   @Test
   void run() {
     // Given
-    final RunOperations run = kc.run()
+    final RunOperations.RunConfigNested run = kc.run()
       .inNamespace(NAMESPACE)
-      .withRunConfig(new RunConfigBuilder()
-        .withName("kc-simple-run")
-        .withImage("busybox")
-        .withEnv(Collections.singletonMap("GREETING", "Hello Jessica Hyde!"))
-        .withCommand("/bin/sh")
-        .withArgs("-c", "echo $GREETING && sleep 3600")
-        .withLabels(Collections.singletonMap("app", "mn-kc-test-run"))
-        .build());
+      .withNewRunConfig()
+      .withName("kc-simple-run")
+      .withImage("busybox")
+      .withEnv(Collections.singletonMap("GREETING", "Hello Jessica Hyde!"))
+      .withCommand("/bin/sh")
+      .withArgs("-c", "echo $GREETING && sleep 3600")
+      .withLabels(Collections.singletonMap("app", "mn-kc-test-run"));
     // When
     final Pod result = run.done();
     // Then
