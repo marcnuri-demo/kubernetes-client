@@ -13,9 +13,9 @@
     <revision>0.0.1-SNAPSHOT</revision>
     <java.version>11</java.version>
     <global.name>blog.marcnuri.com :: Kubernetes Client</global.name>
-    <apache.maven.maven-compiler-plugin.version>3.8.1</apache.maven.maven-compiler-plugin.version>
-    <apache.maven.maven-assembly-plugin.version>3.1.1</apache.maven.maven-assembly-plugin.version>
-    <apache.maven.maven-surefire-plugin.version>3.0.0-M5</apache.maven.maven-surefire-plugin.version>
+    <apache.maven.maven-compiler-plugin.version>3.13.0</apache.maven.maven-compiler-plugin.version>
+    <apache.maven.maven-assembly-plugin.version>3.7.1</apache.maven.maven-assembly-plugin.version>
+    <apache.maven.maven-surefire-plugin.version>3.5.2</apache.maven.maven-surefire-plugin.version>
     <apache.commons.commons-compress.version>1.27.1</apache.commons.commons-compress.version>
     <jackson.bundle.version>2.17.1</jackson.bundle.version>
     <kubernetes-client.version>6.13.4</kubernetes-client.version>
