@@ -14,10 +14,10 @@ import org.junit.jupiter.api.Test;
 
 import java.nio.file.Path;
 import java.util.Collections;
+import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 import static com.marcnuri.demo.kubernetesclient.Utils.execCommand;
-import static org.awaitility.Awaitility.await;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 
@@ -46,8 +46,7 @@ class UploadITCase {
           .endMetadata()
         .build()
     ).create();
-    await().atMost(10, TimeUnit.SECONDS).until(() ->
-      kc.pods().withName(name).get().getStatus().getPhase().equals("Running"));
+    kc.pods().withName(name).waitUntilReady(10, TimeUnit.SECONDS);
   }
 
   @AfterAll
@@ -58,7 +57,7 @@ class UploadITCase {
 
   private static void deletePod() {
     kc.pods().withName(name).withGracePeriod(1L).delete();
-    await().atMost(10, TimeUnit.SECONDS).until(() -> kc.pods().withName(name).get() == null);
+    kc.pods().withName(name).waitUntilCondition(Objects::isNull, 10, TimeUnit.SECONDS);
   }
 
   @Test
