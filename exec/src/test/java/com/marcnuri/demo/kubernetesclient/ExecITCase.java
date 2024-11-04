@@ -14,8 +14,7 @@ import java.util.Collections;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.core.Is.is;
+import static org.assertj.core.api.Assertions.assertThat;
 
 class ExecITCase {
 
@@ -80,7 +79,7 @@ class ExecITCase {
         .exec("sh", "-c", "sleep 8 && echo hello");
       cdl.await(10, TimeUnit.SECONDS);
       // Then
-      assertThat(result.toString(StandardCharsets.UTF_8), is("hello\n"));
+      assertThat(result.toString(StandardCharsets.UTF_8)).isEqualTo("hello\n");
     }
   }
 }
