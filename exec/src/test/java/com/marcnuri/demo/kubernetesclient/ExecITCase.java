@@ -11,10 +11,10 @@ import org.junit.jupiter.api.Test;
 import java.io.ByteArrayOutputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.Collections;
+import java.util.Objects;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
-import static org.awaitility.Awaitility.await;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 
@@ -40,8 +40,7 @@ class ExecITCase {
           .endMetadata()
       .build()
     ).create();
-    await().atMost(10, TimeUnit.SECONDS).until(() ->
-      kc.pods().withName("busybox").get().getStatus().getPhase().equals("Running"));
+    kc.pods().withName("busybox").waitUntilReady(10, TimeUnit.SECONDS);
   }
 
   @AfterAll
@@ -52,7 +51,7 @@ class ExecITCase {
 
   private static void deletePod() {
     kc.pods().withName("busybox").withGracePeriod(1L).delete();
-    await().atMost(10, TimeUnit.SECONDS).until(() -> kc.pods().withName("busybox").get() == null);
+    kc.pods().withName("busybox").waitUntilCondition(Objects::isNull, 10, TimeUnit.SECONDS);
   }
 
   @Test
